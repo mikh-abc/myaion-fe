@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>Aion DPS Meter</title><meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+<meta name="keywords" content="Aion, dps, meter, status, online, European, servers, EU, Deyla, Antriksha, Hellion, Urtem, Hyperion, Barus, Loki, Thor"/>
+<meta name="description" content="aiDPSMeter - Aion DPS Meter"/>
+<meta http-equiv="Pragma" content="no-cache"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- CSS Stylesheet -->
+<style type="text/css">
+img {max-width: 100%;max-height: 100%;}
+table {border-collapse: separate;border-spacing: 2px;display: table;font-style: normal;font-weight: 400;font-family: calibri, sans-serif;letter-spacing: normal;text-align: default;text-indent: 0px;white-space: normal;word-spacing: normal;}
+tr { display: table-row;vertical-align: inherit;}
+td { border: 0px;margin: 0px;}
+td.text {width: 120px;}
+h2 {text-align: center;}
+td.separator {width: 10px;}
+ol, ul {list-style: none;}
+li {display: list-item; text-align: -webkit-match-parent;}
+#cookiecontentwindow { display: none; background-color: rgb(0, 168, 255); position: fixed; width: 100%; left: 0; right: 0; bottom: 0; padding: 20px 0px; text-align: center; line-height: 22px; font-family: calibri, sans-serif; }
+#cookiecontentmessage { line-height: 22px; word-wrap: break-word; color: rgb(255, 255, 255); vertical-align: middle;}
+#cookiecontentclose { vertical-align: middle; margin: 0px 20px}
+#main {font-family: calibri, sans-serif;margin: 0 auto;display: block;max-width: 700px;background: #F0F0F0;border: 1px solid #A0A0A0; border-radius: 6px;}
+#common_text {padding: 10px;}
+#footer {font-size: 80%;}
+#fontred {color: red;}
+#menu_nav {background: #C0C0C0; display: table; padding: 0px; width: 100%; font-size: 110%;}
+#menu_nav ul {padding: 0; margin: 0; text-align:center;}
+#menu_nav li {display:inline-block;}
+#menu_nav ul li a {text-decoration: none; color: black;}
+#menu_nav ul li {padding: 6px 10px; margin: 2px 2px; background: #C0C0C0;}
+#menu_nav li:hover {background-color: #B0B0B0;}
+#menu_nav_sub a:hover {background-color: #B0B0B0;}
+.menuDropdownContent {display: none; position: absolute; background-color: #C0C0C0; min-width: 120px;
+    overflow: auto; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1;}
+.menuDropdownContent a {padding: 6px 10px; margin: 2px 2px; text-decoration: none; display: block;}
+.menuDropdownContent a:hover {background-color: #B0B0B0;}
+.show {display:block;}
+</style><!-- / CSS Stylesheet -->
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(52860490, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/52860490" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="cookiecontentwindow"><!--googleoff: all-->
+<span id="cookiecontentmessage">This site uses cookies. By continuing to browse this site, you are agreeing to our <a label="learn more about cookies" href="cookie_policy.html">Cookie Policy</a>. </span><a href="#" onclick="document.getElementById('cookiecontentwindow').style.display = 'none';"><img id="cookiecontentclose" src="/img/buttonclose.svg" width="22" height="22" alt="dismiss cookie message"/></a>
+<!--googleon: all--></div>
+<div id="main">
+<!--# include file="common_menu.html" -->
+<div id="common_text">
+<h2>aiDPSMeter - Assistance widget</h2>
+<h4>Timer</h2>
+<p>Subwidget shows Timer. Timer can be activated by user or by events "spawn" and "despawn" defined on Subwidget Events.</p>
+<h4>PvE</h2>
+<p>Subwidget shows information about Bosses in high level instances and show Players DPS.<br/>Boss information contains max HP and its state.<br/>State of boss can be one of:
+<ol>
+<li><img alt="Idle" src="/img/bossIdle.png"/> idle boss state</li>
+<li><img alt="Fight" src="/img/bossFight.png"/> boss in combat state</li>
+<li><img alt="Done" src="/img/bossDone.png"/> boss killed state</li>
+<li><img alt="Failed" src="/img/bossFailed.png"/> boss failed state (upload will not be possible)</li>
+</ol>
+Results will be automaticaly upload and avalable on <a href="/myaion.html">MyAion</a> after few seconds.</p>
+<h4>Skills</h2>
+<center><p><img alt="aiDPSMeter" src="/img/assistanceskills.png"/></p></center>
+<p>Subwidget shows information about NPC castspell defined on Subwidget Events and NPC Target switching. Use Right Click to activate context Menu.</p>
+<h4>Events</h2>
+<center><p><img alt="aiDPSMeter" src="/img/assistanceevents.png"/></p></center>
+<p>Subwidget shows events list for Subwidgets Timer and Skills.<br/>Event types for Subwidget Timer: spawn, despawn<br/>Event type for Subwidget Skills: castspell with enanled "Visible" checkbox. Use Right Click to activate context Menu.</p>
+</div></div></body><script src="/cookie_message.js"></script></html>
