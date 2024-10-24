@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Aion Ranking</title>
+ <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+ <meta name="keywords" content="Aion, pve, ranking, European, servers, Stormwing, Sillus, Odin, Ragnarok"/>
+ <meta name="description" content="Aion PVE ranking"/> 
+ <meta name="viewport" content="width=650, initial-scale=1.0"/>
+ <script src="langdata.js"></script>
+ <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel = "stylesheet" type = "text/css" href = "general.css" />
+<link rel = "stylesheet" type = "text/css" href = "loading.css" />
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(52860490, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+
+<!-- CSS Stylesheet -->
+<style type="text/css">
+tr.clickable {
+  cursor: pointer;
+}
+</style><!-- / CSS Stylesheet -->
+
+<noscript><div><img src="https://mc.yandex.ru/watch/52860490" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="cookiecontentwindow"><!--googleoff: all-->
+<span id="cookiecontentmessage">This site uses cookies. By continuing to browse this site, you are agreeing to our <a label="learn more about cookies" href="cookie_policy.html">Cookie Policy</a>. </span><a href="#" onclick="document.getElementById('cookiecontentwindow').style.display = 'none';"><img id="cookiecontentclose" src="/img/buttonclose.svg" width="22" height="22" alt="dismiss cookie message"/></a>
+<!--googleon: all--></div>
+<div id="main">
+<!--# include file="common_menu.html" -->
+<div id="common_text">
+<h2 id="header">Рейтинг PvE</h2>
+<div class="app-loading" id="spinner-loading"><svg class="spinner" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>
+<center id="data-table" style="display: none"></center>
+</div></div></body>
+<script src="/cookie_message.js"></script>
+ <script>
+   	var url = new URL(window.location.href);
+	var boss = url.searchParams.get("b");
+	var version = url.searchParams.get("v");
+ 
+    function formatNumber(num) {
+		return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+	};
+ 
+    function viewPvE(event) {
+	  var pveid = event.currentTarget.eventParam;
+	  if (pveid != null) {
+	    window.open("/viewpve.html?id=" + pveid, "_self");
+	  }
+    };
+ 
+    function createTable(data) {
+        var headers = ["#", "Имя", "Раса/Сервер", "DPS", ""];
+
+        var table = document.createElement("table");
+		table.className = 'table table-bordered';
+		var thead = table.createTHead();
+        var tr = thead.insertRow(-1);
+        for (var i = 0; i < headers.length; i++) {
+            var th = document.createElement("th");
+            th.innerHTML = headers[i];
+            tr.appendChild(th);
+        }
+
+        var tbody = table.createTBody();
+        for (var i = 0; i < data.length; i++) {
+		    let server = serverList[data[i].server];
+            tr = tbody.insertRow(-1);
+			if (i % 2 == 1) {
+			  tr.className = 'even clickable';
+			} else {
+			  tr.className = 'clickable';
+			}
+			tr.addEventListener('click', viewPvE, false);
+            tr.eventParam = data[i].pveid;
+            var cellPos = tr.insertCell(-1);
+            cellPos.innerHTML = data[i].pos;
+			
+            var cellName = tr.insertCell(-1);
+            cellName.innerHTML = `<img src="/img/class${data[i].class + server.type}.png" style="vertical-align:middle"/> ${data[i].name}`;
+			cellName.width = '180px';
+			
+			var cellServer = tr.insertCell(-1);
+            cellServer.innerHTML = `<img src="/img/race${data[i].race}.png" style="vertical-align:middle"/> <img src="/img/${server.lang}.png" style="vertical-align:middle"> ${server.name}`;
+			cellServer.width = '130px';
+	        
+			var cellDps = tr.insertCell(-1);
+            cellDps.innerHTML = formatNumber(data[i].dps);
+			cellDps.className = 'right';
+	        
+			var cellId = tr.insertCell(-1);
+			if (data[i].pveid != null) {
+              cellId.innerHTML = `<img src="/img/info.svg" style="vertical-align:middle" width="16" height="16" alt="view"/>`;
+			}
+        }
+
+        var divContainer = document.getElementById("data-table");
+        divContainer.appendChild(table);
+    }; 
+	
+	function createTables(data) {
+	  var tables = ["", "1", "2", "4", "5", "7", "8", "10", "11", "13"];
+	  for (var i = 0; i < tables.length; i++) {
+        createTable(data[tables[i]]);
+      }
+	};
+	document.getElementById('header').textContent = "Рейтинг PvE - " + bosses[boss];
+	
+	var dataUrl;
+	if (version === null) {
+		dataUrl = '/ranking/boss' + boss + '.json';
+	} else {
+		dataUrl = '/ranking/v' + version + '/boss' + boss + '.json';
+	}
+	
+  $.getJSON(dataUrl, function(data) {
+      createTables(data);
+      document.getElementById('spinner-loading').style.display = 'none';
+	  document.getElementById("data-table").style.display = "block";
+  });
+</script>
+
+</html>

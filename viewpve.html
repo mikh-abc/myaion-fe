@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Aion Ranking</title>
+ <meta http-equiv='content-type' content='text/html; charset=UTF-8'/>
+ <meta name="viewport" content="width=650, initial-scale=1.0"/>
+ <meta name="keywords" content="Aion, pve, ranking, European, servers, Stormwing, Sillus, Odin, Ragnarok"/>
+ <meta name="description" content="Aion PVE ranking"/>  
+ <script  type="text/javascript" charset="UTF-8" src="langdata.js"></script>
+ <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <script src= "jquery.tablesorter.min.js"></script>
+ <script src= "jquery.tablesorter.widgets.js"></script>
+<link rel = "stylesheet" type = "text/css" href = "general.css" />
+<link rel = "stylesheet" type = "text/css" href = "loading.css" />
+<style type="text/css">
+.tablesorter-headerDesc {background-repeat: no-repeat;background-position: right center;background-image: url(/img/arrow_down.png);}
+.tablesorter-headerAsc {background-repeat: no-repeat;background-position: right center;background-image: url(/img/arrow_up.png);}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(52860490, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/52860490" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+<div id="cookiecontentwindow"><!--googleoff: all-->
+<span id="cookiecontentmessage">This site uses cookies. By continuing to browse this site, you are agreeing to our <a label="learn more about cookies" href="cookie_policy.html">Cookie Policy</a>. </span><a href="#" onclick="document.getElementById('cookiecontentwindow').style.display = 'none';"><img id="cookiecontentclose" src="/img/buttonclose.svg" width="22" height="22" alt="dismiss cookie message"/></a>
+<!--googleon: all--></div>
+<div id="main" >
+<!--# include file="common_menu.html" -->
+<div id="common_text">
+<h2 id="header"></h2>
+<div class="app-loading" id="spinner-loading"><svg class="spinner" viewBox="25 25 50 50"><circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/></svg></div>
+<center>
+<p id="leftInfo" style="text-align: left; width:30%; display: inline-block;"/>
+<p id="rightInfo" style="text-align: right; width:30%;  display: inline-block;"/>
+</center>
+<center id="data-table" style="display: none"></center>
+</div></div></body>
+<script src="/cookie_message.js"></script>
+<script>
+  var url = new URL(window.location.href);
+  var id = url.searchParams.get("id");
+  var players = [];
+  function formatNumber(num) {
+    var s = Math.floor(num)
+	  return s.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  };
+	
+  function toMMSS(totalSecs) {
+    var minutes = Math.floor(totalSecs / 60);
+    var seconds = totalSecs - (minutes * 60);
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    return minutes + ':' + seconds;
+  }
+
+  function createTable(players) {
+    var headers = ["Имя", "Раса/Сервер", "Урон", "DPS", "Лечение"];
+
+    var table = document.createElement('table');
+    table.className = 'table tablesorter table-bordered';
+	
+	var thead = table.createTHead();
+    var tr = thead.insertRow(-1);
+    for (var i = 0; i < headers.length; i++) {
+      var th = document.createElement("th");
+      th.innerHTML = headers[i];
+	  //th.className = activeColumn(i);
+	  //th.addEventListener('click', changeSorting, false);
+      tr.appendChild(th);
+    }
+
+    var tbody = table.createTBody();
+    for (var i = 0; i < players.length; i++) {
+	  let server = serverList[players[i].server];
+      tr = tbody.insertRow(-1);
+	  
+      var cellName = tr.insertCell(-1);
+      cellName.innerHTML = `<img src="/img/class${players[i].class + server.type}.png" style="vertical-align:middle"/> ${players[i].name}`;
+	  cellName.width = '180px';
+			
+	  var cellServer = tr.insertCell(-1);
+      cellServer.innerHTML = `<img src="/img/race${players[i].race}.png" style="vertical-align:middle"/> <img src="/img/${server.lang}.png" style="vertical-align:middle"> ${server.name}`;
+	  cellServer.width = '130px';
+	        
+	  var cellDamage = tr.insertCell(-1);
+      cellDamage.innerHTML = formatNumber(players[i].damage);
+	  cellDamage.className = 'right';
+	  
+	  var cellDps = tr.insertCell(-1);
+      cellDps.innerHTML = formatNumber(players[i].dps);
+	  cellDps.className = 'right';
+	  
+	  var cellHeal = tr.insertCell(-1);
+      cellHeal.innerHTML = formatNumber(players[i].heal);
+	  cellHeal.className = 'right';
+    }
+
+    var divContainer = document.getElementById("data-table");
+	divContainer.innerHTML = '';
+    divContainer.appendChild(table);
+	
+	$(table).tablesorter({
+	  sortList: [[2,1]],
+	  widgets: ["zebra"]
+	});
+	
+  }; 
+
+  $.getJSON('/pvedata/pve?id=' + id, function(data) {
+      document.getElementById('header').textContent = bosses[data.boss];
+	  document.getElementById('leftInfo').textContent = toMMSS(data.duration);
+	  var date = new Date(data.time * 1000);
+	  document.getElementById('rightInfo').textContent = date.toLocaleString();
+      for (var i = 0; i < data.players.length; i++) {
+	    players[i] = data.players[i];
+		players[i].dps = players[i].damage / data.duration;
+	  }
+      document.getElementById('spinner-loading').style.display = 'none';
+	  document.getElementById("data-table").style.display = "block";
+      createTable(players);
+  });
+</script>
+
+</html>

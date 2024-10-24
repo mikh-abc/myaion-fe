@@ -1,0 +1,57 @@
+var serverList = {};
+serverList[2] = {lang: "ru", name: "Марк", type: "c"};
+serverList[3] = {lang: "ru", name: "Джик", type: "c"};
+serverList[4] = {lang: "ru", name: "Недж", type: "c"};
+serverList[21] = {lang: "uk", name: "Atrei", type: "c"};
+serverList[22] = {lang: "uk", name: "Tahab", type: "c"};
+serverList[35] = {lang: "uk", name: "Storm", type: "l"};
+serverList[38] = {lang: "uk", name: "Sillus", type: "l"};
+serverList[62] = {lang: "de", name: "Odin", type: "l"};
+serverList[63] = {lang: "fr", name: "Ragna", type: "l"};
+
+var bosses = {};
+bosses[650025] = "Prigga"; //7.x
+bosses[650026] = "Raging Prigga"; // 6.x
+bosses[654006] = "Cursed Ovel"; //6.x
+bosses[654009] = "Cursed Shureik"; //6.x
+bosses[654472] = "Nergal"; //6.x
+bosses[654689] = "Beritra"; //6.x
+bosses[656409] = "3rd Dragon Lord Ereshkigal";
+bosses[858270] = "Beritra"; //7.x
+bosses[858277] = "Weakling Daeva Mob Leader";
+bosses[858115] = "Daeva Mob Leader";
+bosses[858366] = "Raging Barkhan";
+bosses[858367] = "Suffering Raging Prometun"
+bosses[858368] = "Raging Tarukkan"
+bosses[858369] = "Raging Prigga"
+bosses[858685] = "SVR-07 Weakness";
+bosses[858513] = "SVR-07 Special Tank";
+bosses[858672] = "Raging Magma Protector";
+bosses[858889] = "Raging Oris";
+bosses[858972] = "Raging Beritra";
+bosses[858716] = "Mortasha";
+bosses[858788] = "Weak Mortasha";
+bosses[858938] = "Stormwing";
+bosses[858988] = "Pale Stormwing";
+bosses[859019] = "Ishkur";
+bosses[859082] = "Pa-Aq";
+
+bosses[216167] = "Пленный воин Тарос";
+bosses[216183] = "Рудра неистовой бури";
+bosses[218756] = "Чуткая Марисса";
+bosses[219038] = "Освобожденный Рудра бури";
+bosses[217607] = "Сильный марбат";
+bosses[217608] = "Покоритель огня Тахабата";
+bosses[217609] = "Повелитель пространства Баррут";
+bosses[215179] = "Перерождающийся лорд-заступник Ткисаса";
+bosses[215222] = "Перерождающийся лорд-заступник Ра-Мирэна";
+bosses[215136] = "Перерождающийся лорд-заступник Кротана";
+bosses[219368] = "Тиамат";
+bosses[219820] = "Фаэтос";
+bosses[219835] = "Несчастная Самаэль";
+
+
+var locations = {};
+locations[300110000] = "Дерадикон";
+locations[300210000] = "Дерадикон Джантры";
+locations[300440000] = "Лаборатория Тиарх";

@@ -1,0 +1,36 @@
+<script type="text/javascript">
+function showWidgetMenu() {
+    document.getElementById("widgetMenuDropdown").classList.toggle("show");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.menu_nav_sub')) {
+
+    var dropdowns = document.getElementsByClassName("menuDropdownContent");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+<div id="common_menu">
+<div id="menu_nav">
+<ul>
+<li class="menu_nav"><a href="/" title="Main">Главная</a></li>
+<li class="menu_nav"><a href="/history.html" title="History">История</a></li>
+<li class="menu_nav"><a href="/download.html" title="Download aiDPSMeter">Скачать</a></li>
+<li class="menu_nav_sub"><a href="javascript:showWidgetMenu()" title="Widgets">Widgets</a>
+<div id="widgetMenuDropdown" class="menuDropdownContent">
+<a href="/assistance.html" class="menu_nav_sub">Assistance</a>
+<a href="/battlefield.html" class="menu_nav_sub">Battleground</a>
+<a href="/myaion.html" class="menu_nav_sub">MyAion</a>
+</div></li>
+<li class="menu_nav"><a href="/ranking.html" title="Ranking">Рейтинг</a></li>
+<li class="menu_nav"><a href="/search.html" title="Search">Поиск</a></li>
+</ul>
+</div>
+</div>
